@@ -22,6 +22,7 @@
 		previouslySize = "";
 		numberOfCalculsMax = document.getElementById("maxValue").value;
 		const listOfAlreadyProcessedCalcul = [];
+		const listOfCalculResponse = [];
 
 		function initialize() {
             document.getElementById('start').style.visibility = 'visible';
@@ -33,6 +34,7 @@
             numberOfErrors = 0;
 			numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
+			listOfCalculResponse.length = 0;
 		}
 
 		function verify() {
@@ -40,24 +42,6 @@
 			showResponse();
 
 			alert("Vous avez " + numberOfErrors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors)/(numberOfCalculs / 5))) + ")");
-
-			//if (lvalue == "") {
-			//	alert("Remplissez le champ!");
-			//}
-			//else {
-			//	answer = listOfCalculs[size].toString();
-			//	indexation = answer.indexOf('=');
-			//	defanswer = answer.toString().substr(indexation + 2);
-
-   //             if (defanswer == document.getElementById("calc1").value) {
-			//		alert("La réponse est correcte!");
-			//	}
-			//	else {
-			//		answer = listOfCalculs[size].toString();
-			//		indexation = answer.indexOf('=');
-   //                 alert("La réponse est fausse! La solution au problème est: " + defanswer);
-			//	}
-			//}
 		}
 
 		function randomValue() {
@@ -70,6 +54,7 @@
             numberOfErrors = 0;
             numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
+			listOfCalculResponse.length = 0;
 
 			generateCalcTable();
 		}
@@ -86,7 +71,7 @@
 				}
 			}
 
-            listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
+            listOfAlreadyProcessedCalcul[0] = size;
 
             document.getElementById('start').style.disable = 'true';
 			document.getElementById('check').style.visibility = 'visible';
@@ -94,14 +79,14 @@
 
             answer = listOfCalculs[size].toString();
             indexation = answer.indexOf('=');
-			//defanswer = answer.toString().substr(indexation + 2);
-			defanswer = 'undefined';
+			defanswer = answer.toString().substr(indexation + 2);
+			listOfCalculResponse[0] = defanswer;
 
 			let calculStr = listOfCalculs[size].toString();
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + defanswer + " > </td > </tr ></table > ";
+			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + "" + " > </td > </tr ></table > ";
 
-            numberOfCalculs = 1;
+            numberOfCalculs += 1;
 			numberofrows += 1;
 		}
 
@@ -111,8 +96,6 @@
 				verify();
 				return;
 			}
-
-			numberOfCalculs = numberOfCalculs + 1;
 
 			size = randomValue();
 
@@ -132,7 +115,7 @@
             answer = listOfCalculs[size].toString();
             indexation = answer.indexOf('=');
 			defanswer = answer.toString().substr(indexation + 2);
-            defanswer = 'undefined';
+            listOfCalculResponse[numberOfCalculs] = defanswer;
             previouslySize = size;
 			var table = document.getElementById("myTable");
             var row = table.insertRow(numberofrows);
@@ -143,27 +126,29 @@
 			cell1.innerHTML = "";
 			cell2.innerHTML = calcul.toString();
             cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs-1) + " name='calc' value=''>";
-            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs-1) + " class='answ' value=" + defanswer + ">";
+            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs-1) + " class='answ' value=" + "" + ">";
+
 			numberofrows += 1; 
+			numberOfCalculs = numberOfCalculs + 1;
 
 			hiddenResponse();
         }
 
-		function getResponse(id) {
-            lAnswer = listOfCalculs[id].toString();
-            charequalIndex = answer.indexOf('=');
-            return lAnswer.toString().substr(charequalIndex + 2);
-		}
-
 		function showResponse() {
-			for (i = 0; i < 30; i++) {
-				var defAnswer = getResponse(i);
-				document.getElementById("answ".concat(i)).value = 'la réponse est : '.concat(defAnswer.toString());
+            for (i = 0; i < numberOfCalculs; i++) {
+                let answer = getResponseById(i);
+                document.getElementById("answ".concat(i)).value = 'la réponse est : '.concat(answer.toString());
 			}
 		}
 
+        function getResponseById(id) {
+            return listOfCalculResponse[i];
+		}
+
         function hiddenResponse() {
-			document.getElementsByClassName('answ').visibility = 'hidden';
+            //for (i = 0; i < numberOfCalculs; i++) {
+            //    document.getElementById("answ".concat(i)).value = '');
+            //}
 		}
 
 		let listOfCalculs = [
