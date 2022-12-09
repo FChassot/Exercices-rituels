@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title> </title>
+	<title> Exercices rituels (s&#233;ries 1-35)</title>
 	<link rel="stylesheet" href="./css/main1.css">
 	<script src="./js/exercice.js"></script>
 </head>
@@ -22,6 +22,7 @@
 		numberOfErrors = 0;
 		numberOfCalculs = 0;
 		previouslySize = "";
+		numberOfCalculsMax = 10;
 
 		function init() {
             document.getElementById('start').style.visibility = 'visible';
@@ -96,6 +97,11 @@
 		}
 
 		function next() {
+			if (numberOfCalculs == numberOfCalculsMax) {
+				checker();
+				return;
+			}
+
 			numberOfCalculs = numberOfCalculs + 1;
             //numberOfErrors = numberOfErrors + 1;
 
@@ -171,7 +177,7 @@
             ['9 - (-9) x 3 =', '36'],
             ['24 : (2 + 3 x 2) =', '3'],
             ['(-16) + (-3) =', '-19'],
-            ['Que vaut la différence du carré de 7 et du cube de 3 ? =', '22'],
+            ['Que vaut la diff&#233;rence du carr&#233; de 7 et du cube de 3 ? =', '22'],
             ['3^3 : 3 =', '9'],
 			['4^3 - 6^2 =', '28'],
             ['32 : 4^2 =', '2'],
@@ -182,7 +188,7 @@
 			['-28 + 2 x 2^2 =', '-224'],
             ['13 - 3 x 3^3 =', '-14'],
             ['18 + 12 - (-7) + (-21) =', '16'],
-            ['Que vaut la somme du carré de 6 et de la différence de 15 et 4? =', '47'],
+            ['Que vaut la somme du carré de 6 et de la diff&#233;rence de 15 et 4? =', '47'],
             ['Calcule la somme de 17.4 et du quotient de 2.1 par 3 =', '18.1'],
             ['45 - (12 + 3^2 x 4) =', '-3'],
 			['(-10) + (-13) - (-24) =', '1'],
