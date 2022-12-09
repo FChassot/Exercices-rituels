@@ -19,17 +19,11 @@
 		numberofrows = 0;
 		numberOfErrors = 0;
 		numberOfCalculs = 0;
-		previouslySize = "";
 		numberOfCalculsMax = document.getElementById("maxValue").value;
 		const listOfAlreadyProcessedCalcul = [];
 		const listOfCalculResponse = [];
 
 		function initialize() {
-            document.getElementById('start').style.visibility = 'visible';
-            document.getElementById('check').style.visibility = 'visible';
-            document.getElementById('next').style.visibility = 'visible';
-			document.getElementsByClassName('resp').style.visibility = 'hidden';
-
 			hiddenResponse();
             numberOfErrors = 0;
 			numberOfCalculs = 0;
@@ -39,9 +33,9 @@
 
 		function verify() {
 
-			showResponse();
+			alert("Vous avez " + numberOfErrors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors) / (numberOfCalculs / 5))) + ")");
 
-			alert("Vous avez " + numberOfErrors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors)/(numberOfCalculs / 5))) + ")");
+			showResponse();
 		}
 
 		function randomValue() {
@@ -72,10 +66,6 @@
 			}
 
             listOfAlreadyProcessedCalcul[0] = size;
-
-            document.getElementById('start').style.disable = 'true';
-			document.getElementById('check').style.visibility = 'visible';
-			document.getElementById('next').style.visibility = 'visible';
 
             answer = listOfCalculs[size].toString();
             indexation = answer.indexOf('=');
@@ -116,7 +106,7 @@
             indexation = answer.indexOf('=');
 			defanswer = answer.toString().substr(indexation + 2);
             listOfCalculResponse[numberOfCalculs - 1] = defanswer;
-            previouslySize = size;
+
 			var table = document.getElementById("myTable");
             var row = table.insertRow(numberofrows);
 			var cell1 = row.insertCell(0);
@@ -125,8 +115,8 @@
             var cell4 = row.insertCell(3);
 			cell1.innerHTML = "";
 			cell2.innerHTML = calcul.toString();
-            cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs-1) + " name='calc' value=''>";
-            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs-1) + " class='answ' value=" + "" + ">";
+            cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs) + " name='calc' value=''>";
+            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs) + " class='answ' value=" + "" + ">";
 
 			numberofrows += 1; 
 			numberOfCalculs = numberOfCalculs + 1;
