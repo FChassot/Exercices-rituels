@@ -4,10 +4,10 @@
 	<link rel="stylesheet" href="./css/main1.css">
 	<script src="./js/exercice.js"></script>
 </head>
-<body bgcolor ="#11aabb" onload="init();">
+<body bgcolor ="#11aabb" onload="initialize();">
 	<h1> Exercices rituels (s&#233;ries 1-35) </h1>
 	<p>
-		<input type="button" class="main" id="start" value="Start" onclick="generateCalcTable();" /> <input type="button" id="next" value="Next" onclick="next();" /> <input type="button" id="check" value="Verify" onclick="checker();" />
+		<input type="button" class="main" id="start" value="Start" onclick="start();" /> <input type="button" id="next" value="Next" onclick="next();" /> <input type="button" id="check" value="Verify" onclick="verify();" />
 		Nombre de calculs<input type='text' id="maxValue" class='resp' name='resp' value="30">
 
 		<div id="newCalcTable" class="main" />
@@ -23,19 +23,21 @@
 		numberOfCalculsMax = document.getElementById("maxValue").value;
 		const listOfAlreadyProcessedCalcul = [];
 
-		function init() {
+		function initialize() {
             document.getElementById('start').style.visibility = 'visible';
             document.getElementById('check').style.visibility = 'visible';
             document.getElementById('next').style.visibility = 'visible';
 			document.getElementsByClassName('resp').style.visibility = 'hidden';
-			cacheResponse();
+
+			hiddenResponse();
             numberOfErrors = 0;
 			numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
 		}
 
-		function checker() {
-			let lvalue = document.getElementById("calc1").value;
+		function verify() {
+
+/*			showResponse();*/
 
 			alert("Vous avez " + numberOfErrors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors)/(numberOfCalculs / 5))) + ")");
 
@@ -63,10 +65,16 @@
 			return random_int;
 		}
 
-		function generateCalcTable() {
-			numberOfCalculsMax = document.getElementById("maxValue").value;
+		function start() {
+            numberOfCalculsMax = document.getElementById("maxValue").value;
+            numberOfErrors = 0;
+            numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
 
+			generateCalcTable();
+		}
+
+		function generateCalcTable() {
 			size = randomValue();
 
 			for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
@@ -80,9 +88,6 @@
 
             listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
 
-			numberofrows = 0;
-			numberOfCalculs = 1;
-
             document.getElementById('start').style.disable = 'true';
 			document.getElementById('check').style.visibility = 'visible';
 			document.getElementById('next').style.visibility = 'visible';
@@ -94,14 +99,15 @@
 			let calculStr = listOfCalculs[size].toString();
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
 			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text'  name='resp' value=" + defanswer + " > </td > </tr ></table > ";
-			document.getElementById('line').innerHTML = "<tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td> <input type='text' class='resp' name='resp' value=" + defanswer + "> </td ></tr > ";
+
+            numberOfCalculs = 1;
 			numberofrows += 1;
 		}
 
 		function next() {
 			// Lorsque le nombre de calcul a été atteint
 			if (numberOfCalculs == numberOfCalculsMax) {
-				checker();
+				verify();
 				return;
 			}
 
@@ -134,19 +140,20 @@
             var cell4 = row.insertCell(3);
 			cell1.innerHTML = "";
 			cell2.innerHTML = calcul.toString();
-			cell3.innerHTML = "<input type='text' id='calc1' name='calc1' value=''>";
-            cell4.innerHTML = "<input type='text' name='resp' value=" + defanswer + ">";
+            cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs) + " name='calc' value=''>";
+            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs) + " class='answ' value=" + defanswer + ">";
 			numberofrows += 1; 
 
-			cacheResponse();
+			hiddenResponse();
         }
 
-		function displayResponses() {
-            document.getElementsByClassName('resp').visibility = 'visible';
+		function showResponse() {
+			document.getElementsByClassName('answ').visibility = 'visible';
 		}
 
-		function cacheResponse() {
-			document.getElementsByClassName('resp').visibility = 'hidden';
+        function hiddenResponse() {
+/*			console.log(document.getElementsByClassName('answ'));*/
+			document.getElementsByClassName('answ').visibility = 'hidden';
 		}
 
 		let listOfCalculs = [
