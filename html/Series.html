@@ -23,6 +23,7 @@
 		numberOfCalculs = 0;
 		previouslySize = "";
 		numberOfCalculsMax = document.getElementById("maxValue").value;
+		const listOfAlreadyProcessedCalcul = [];
 
 		function init() {
             document.getElementById('start').style.visibility = 'visible';
@@ -64,17 +65,30 @@
 		}
 
 		function generateCalcTable() {
-            numberOfCalculsMax = document.getElementById("maxValue").value;
-            size = randomValue();
-            numberofrows = 0;
+			numberOfCalculsMax = document.getElementById("maxValue").value;
+
+			size = randomValue();
+
+			for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
+				if (listOfAlreadyProcessedCalcul[0] == size) {
+					size = randomValue();
+				}
+				else {
+					break;
+				}
+			}
+
+            listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
+
+			numberofrows = 0;
             insertmode = true;
 			doublemode = true;
-            numberOfCalculs = 0;
-            numberOfErrors = numberOfErrors + 1;
-			numberOfCalculs = numberOfCalculs + 1;
+			numberOfCalculs = 1;
+
             document.getElementById('start').style.disable = 'true';
 			document.getElementById('check').style.visibility = 'visible';
 			document.getElementById('next').style.visibility = 'visible';
+
             answer = listOfCalculs[size].toString();
             indexation = answer.indexOf('=');
 			defanswer = answer.toString().substr(indexation + 2);
@@ -86,31 +100,30 @@
 			numberofrows += 1;
 		}
 
-		function insert() {
-			numberOfErrors = numberOfErrors + 1;
-            numberOfCalculs = numberOfCalculs + 1;
-			size = randomValue();
-			answer = listOfCalculs[size].toString();
-			indexation = answer.indexOf('=');
-			defanswer = answer.toString().substr(indexation + 2);
-            let calculStr = listOfCalculs[size].toString();
-			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-			document.getElementById('line').innerHTML = "<tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' name='resp' value=" + defanswer + "> </td></tr>";
-			numberofrows += 1;
-		}
-
 		function next() {
+			// Lorsque le nombre de calcul a été atteint
 			if (numberOfCalculs == numberOfCalculsMax) {
 				checker();
 				return;
 			}
 
 			numberOfCalculs = numberOfCalculs + 1;
-            //numberOfErrors = numberOfErrors + 1;
 
 			if (insertmode) {
 				if (doublemode) {
-                    size = randomValue();
+					size = randomValue();
+
+                    for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
+                        if (listOfAlreadyProcessedCalcul[0] == size) {
+                            size = randomValue();
+                        }
+                        else {
+                            break;
+                        }
+                    }
+
+					listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
+
 					let calculStr = listOfCalculs[size].toString();
 					let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
                     answer = listOfCalculs[size].toString();
@@ -130,7 +143,20 @@
 					numberofrows += 1; 
 				}
 				else {
-                    size = randomValue();
+					size = randomValue();
+
+
+                    for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
+                        if (listOfAlreadyProcessedCalcul[0] == size) {
+                            size = randomValue();
+                        }
+                        else {
+                            break;
+                        }
+                    }
+
+					listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
+
                     let calculStr = listOfCalculs[size].toString();
 					let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
                     answer = listOfCalculs[size].toString();
@@ -152,7 +178,20 @@
 				}
 			}
 			else {
-                size = randomValue();
+				size = randomValue();
+
+
+                for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
+                    if (listOfAlreadyProcessedCalcul[0] == size) {
+                        size = randomValue();
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+				listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
+
                 let calculStr = listOfCalculs[size].toString();
 				let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
                 previouslySize = size;
