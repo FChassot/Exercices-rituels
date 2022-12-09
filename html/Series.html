@@ -1,27 +1,27 @@
 <html>
 <head>
 	<title> Exercices rituels (s&#233;ries 1-35)</title>
-	<link rel="stylesheet" href="./css/main.css">
-	<script src="./js/exercice.js"></script>
+	<link rel="stylesheet" href="../css/main.css">
+	<script src="../js/exercice.js"></script>
 </head>
 <body bgcolor ="#11aabb" onload="initialize();">
 	<h1> Exercices rituels (s&#233;ries 1-35) </h1>
 	<p>
-		<input type="button" class="main" id="start" value="Demarrer un test" onclick="start();" /> <input type="button" id="next" value="Prochain calcul" onclick="next();" /> <input type="button" id="check" value="Verifier" onclick="verify();" />
-		Nombre de calculs<input type='text' id="maxValue" class='resp' name='resp' value="30">
+		<input type="button" class="main" id="start" value="Demarrer un test de 30 questions" onclick="start();" /> <input type="button" id="next" value="Prochain calcul" onclick="next();" /> <input type="button" id="check" value="Verifier" onclick="verify();" />
+		Nombre de calculs<input type='text' id="maxValue" class='resp' name='numbercalc' value="30">
 
 		<div id="newCalcTable" class="main" />
 <p>
 	<div id="footer"></div>
 
 	<script>
-        size = randomValue();
+        calculId = randomValue();
 		numberOfErrors = 0;
 		numberOfCalculs = 0;
 		numberOfCalculsMax = document.getElementById("maxValue").value;
-		const listOfAlreadyProcessedCalcul = [];
-		const listOfUserResponse = [];
-		const listOfCalculResponse = [];
+		listOfAlreadyProcessedCalcul = [];
+		listOfUserResponse = [];
+		listOfCalculResponse = [];
 
 		function initialize() {
 			hiddenResponse();
@@ -47,7 +47,7 @@
 		}
 
 		function start() {
-            numberOfCalculsMax = document.getElementById("maxValue").value;
+			numberOfCalculsMax = 30; //document.getElementById("maxValue").value;
 			numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
 			listOfCalculResponse.length = 0;
@@ -56,25 +56,25 @@
 		}
 
 		function generateCalcTable() {
-			size = randomValue();
+            calculId = randomValue();
 
 			for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
-				if (listOfAlreadyProcessedCalcul[0] == size) {
-					size = randomValue();
+                if (listOfAlreadyProcessedCalcul[0] == calculId) {
+                    calculId = randomValue();
 				}
 				else {
 					break;
 				}
 			}
 
-            listOfAlreadyProcessedCalcul[0] = size;
+            listOfAlreadyProcessedCalcul[0] = calculId;
 
-            answer = listOfCalculs[size].toString();
+            answer = listOfCalculs[calculId].toString();
             indexation = answer.indexOf('=');
 			defanswer = answer.toString().substr(indexation + 2);
 			listOfCalculResponse[0] = defanswer;
 
-			let calculStr = listOfCalculs[size].toString();
+            let calculStr = listOfCalculs[calculId].toString();
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
 			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' name='calc' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + "" + " > </td > </tr ></table > ";
 
@@ -88,22 +88,22 @@
 				return;
 			}
 
-			size = randomValue();
+            calculId = randomValue();
 
             for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
-                if (listOfAlreadyProcessedCalcul[0] == size) {
-                    size = randomValue();
+                if (listOfAlreadyProcessedCalcul[0] == calculId) {
+                    calculId = randomValue();
                 }
                 else {
                     break;
                 }
             }
 
-			listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
+            listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = calculId;
 
-			let calculStr = listOfCalculs[size].toString();
+            let calculStr = listOfCalculs[calculId].toString();
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-            answer = listOfCalculs[size].toString();
+            answer = listOfCalculs[calculId].toString();
             indexation = answer.indexOf('=');
 			defanswer = answer.toString().substr(indexation + 2);
             listOfCalculResponse[numberOfCalculs] = defanswer;
@@ -119,7 +119,6 @@
             cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs) + " name='calc' value=''>";
             cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs) + " class='answ' value=" + "" + ">";
 
-			numberofrows += 1; 
 			numberOfCalculs += 1;
 
 			hiddenResponse();
