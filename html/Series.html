@@ -17,8 +17,6 @@
 	<script>
         size = randomValue();
 		numberofrows = 0;
-		insertmode = true;
-		doublemode = true;
 		numberOfErrors = 0;
 		numberOfCalculs = 0;
 		previouslySize = "";
@@ -32,7 +30,8 @@
 			document.getElementsByClassName('resp').style.visibility = 'hidden';
 			cacheResponse();
             numberOfErrors = 0;
-            numberOfCalculs = 0;
+			numberOfCalculs = 0;
+			listOfAlreadyProcessedCalcul.length = 0;
 		}
 
 		function checker() {
@@ -66,6 +65,7 @@
 
 		function generateCalcTable() {
 			numberOfCalculsMax = document.getElementById("maxValue").value;
+			listOfAlreadyProcessedCalcul.length = 0;
 
 			size = randomValue();
 
@@ -81,8 +81,6 @@
             listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
 
 			numberofrows = 0;
-            insertmode = true;
-			doublemode = true;
 			numberOfCalculs = 1;
 
             document.getElementById('start').style.disable = 'true';
@@ -109,95 +107,36 @@
 
 			numberOfCalculs = numberOfCalculs + 1;
 
-			if (insertmode) {
-				if (doublemode) {
-					size = randomValue();
+			size = randomValue();
 
-                    for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
-                        if (listOfAlreadyProcessedCalcul[0] == size) {
-                            size = randomValue();
-                        }
-                        else {
-                            break;
-                        }
-                    }
-
-					listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
-
-					let calculStr = listOfCalculs[size].toString();
-					let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-                    answer = listOfCalculs[size].toString();
-                    indexation = answer.indexOf('=');
-                    defanswer = answer.toString().substr(indexation + 2);
-                    previouslySize = size;
-					var table = document.getElementById("myTable");
-                    var row = table.insertRow(numberofrows);
-					var cell1 = row.insertCell(0);
-					var cell2 = row.insertCell(1);
-					var cell3 = row.insertCell(2);
-                    var cell4 = row.insertCell(3);
-					cell1.innerHTML = "";
-					cell2.innerHTML = calcul.toString();
-					cell3.innerHTML = "<input type='text' id='calc1' name='calc1' value=''>";
-                    cell4.innerHTML = "<input type='text' name='resp' value=" + defanswer + ">";
-					numberofrows += 1; 
-				}
-				else {
-					size = randomValue();
-
-
-                    for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
-                        if (listOfAlreadyProcessedCalcul[0] == size) {
-                            size = randomValue();
-                        }
-                        else {
-                            break;
-                        }
-                    }
-
-					listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
-
-                    let calculStr = listOfCalculs[size].toString();
-					let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-                    answer = listOfCalculs[size].toString();
-                    indexation = answer.indexOf('=');
-                    defanswer = answer.toString().substr(indexation + 2);
-                    previouslySize = size;
-                    var table = document.getElementById("myTable");
-                    var row = table.insertRow(0);
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-					var cell3 = row.insertCell(2);
-					var cell4 = row.insertCell(3);
-                    cell1.innerHTML = "";
-                    cell2.innerHTML = calcul.toString();
-					cell3.innerHTML = "<input type='text' id='calc1' name='calc1' value=''>";
-					cell4.innerHTML = "<input type='text' name='resp' value=" + defanswer + ">";
-
-					numberofrows += 1;
-				}
-			}
-			else {
-				size = randomValue();
-
-
-                for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
-                    if (listOfAlreadyProcessedCalcul[0] == size) {
-                        size = randomValue();
-                    }
-                    else {
-                        break;
-                    }
+            for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
+                if (listOfAlreadyProcessedCalcul[0] == size) {
+                    size = randomValue();
                 }
+                else {
+                    break;
+                }
+            }
 
-				listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
+			listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = size;
 
-                let calculStr = listOfCalculs[size].toString();
-				let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-                previouslySize = size;
-                document.getElementById('line').innerHTML = "<tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' name='resp' value='juste'> </td></tr>";
-				numberofrows += 1;
-			}
+			let calculStr = listOfCalculs[size].toString();
+			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
+            answer = listOfCalculs[size].toString();
+            indexation = answer.indexOf('=');
+            defanswer = answer.toString().substr(indexation + 2);
+            previouslySize = size;
+			var table = document.getElementById("myTable");
+            var row = table.insertRow(numberofrows);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+			cell1.innerHTML = "";
+			cell2.innerHTML = calcul.toString();
+			cell3.innerHTML = "<input type='text' id='calc1' name='calc1' value=''>";
+            cell4.innerHTML = "<input type='text' name='resp' value=" + defanswer + ">";
+			numberofrows += 1; 
 
 			cacheResponse();
         }
