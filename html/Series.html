@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title> Exercices rituels (s&#233;ries 1-35)</title>
-	<link rel="stylesheet" href="./css/main1.css">
+	<link rel="stylesheet" href="./css/main.css">
 	<script src="./js/exercice.js"></script>
 </head>
 <body bgcolor ="#11aabb" onload="initialize();">
@@ -74,7 +74,7 @@
 
 			let calculStr = listOfCalculs[size].toString();
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + "" + " > </td > </tr ></table > ";
+			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> <b>" + calcul.toString() + "</b> </td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + "" + " > </td > </tr ></table > ";
 
             numberOfCalculs += 1;
 			numberofrows += 1;
@@ -105,8 +105,9 @@
             answer = listOfCalculs[size].toString();
             indexation = answer.indexOf('=');
 			defanswer = answer.toString().substr(indexation + 2);
-            listOfCalculResponse[numberOfCalculs - 1] = defanswer;
+            listOfCalculResponse[numberOfCalculs] = defanswer;
 
+			console.log(numberOfCalculs);
 			var table = document.getElementById("myTable");
             var row = table.insertRow(numberofrows);
 			var cell1 = row.insertCell(0);
@@ -125,13 +126,15 @@
         }
 
 		function showResponse() {
+			console.log(numberOfCalculs);
+
             for (i = 0; i < numberOfCalculs; i++) {
                 let answer = getResponseById(i);
                 document.getElementById("answ".concat(i)).value = 'la réponse est : '.concat(answer.toString());
 			}
 		}
 
-        function getResponseById(id) {
+		function getResponseById(id) {
             return listOfCalculResponse[i];
 		}
 
