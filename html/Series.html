@@ -37,7 +37,7 @@
 
 		function verify() {
 
-/*			showResponse();*/
+			showResponse();
 
 			alert("Vous avez " + numberOfErrors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors)/(numberOfCalculs / 5))) + ")");
 
@@ -94,11 +94,12 @@
 
             answer = listOfCalculs[size].toString();
             indexation = answer.indexOf('=');
-			defanswer = answer.toString().substr(indexation + 2);
+			//defanswer = answer.toString().substr(indexation + 2);
+			defanswer = 'undefined';
 
 			let calculStr = listOfCalculs[size].toString();
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text'  name='resp' value=" + defanswer + " > </td > </tr ></table > ";
+			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + defanswer + " > </td > </tr ></table > ";
 
             numberOfCalculs = 1;
 			numberofrows += 1;
@@ -130,7 +131,8 @@
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
             answer = listOfCalculs[size].toString();
             indexation = answer.indexOf('=');
-            defanswer = answer.toString().substr(indexation + 2);
+			defanswer = answer.toString().substr(indexation + 2);
+            defanswer = 'undefined';
             previouslySize = size;
 			var table = document.getElementById("myTable");
             var row = table.insertRow(numberofrows);
@@ -140,19 +142,27 @@
             var cell4 = row.insertCell(3);
 			cell1.innerHTML = "";
 			cell2.innerHTML = calcul.toString();
-            cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs) + " name='calc' value=''>";
-            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs) + " class='answ' value=" + defanswer + ">";
+            cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs-1) + " name='calc' value=''>";
+            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs-1) + " class='answ' value=" + defanswer + ">";
 			numberofrows += 1; 
 
 			hiddenResponse();
         }
 
+		function getResponse(id) {
+            lAnswer = listOfCalculs[id].toString();
+            charequalIndex = answer.indexOf('=');
+            return lAnswer.toString().substr(charequalIndex + 2);
+		}
+
 		function showResponse() {
-			document.getElementsByClassName('answ').visibility = 'visible';
+			for (i = 0; i < 30; i++) {
+				var defAnswer = getResponse(i);
+				document.getElementById("answ".concat(i)).value = 'la réponse est : '.concat(defAnswer.toString());
+			}
 		}
 
         function hiddenResponse() {
-/*			console.log(document.getElementsByClassName('answ'));*/
 			document.getElementsByClassName('answ').visibility = 'hidden';
 		}
 
