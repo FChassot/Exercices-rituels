@@ -115,7 +115,7 @@
             answer = listOfCalculs[size].toString();
             indexation = answer.indexOf('=');
 			defanswer = answer.toString().substr(indexation + 2);
-            listOfCalculResponse[numberOfCalculs] = defanswer;
+            listOfCalculResponse[numberOfCalculs - 1] = defanswer;
             previouslySize = size;
 			var table = document.getElementById("myTable");
             var row = table.insertRow(numberofrows);
