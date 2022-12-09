@@ -33,6 +33,7 @@
 		function verify() {
 
 			fillListOfUserResponse();
+			showResponse();
 
 			var numberOfErrors = getNumberOfErrors();
 
@@ -76,7 +77,13 @@
 
             let calculStr = listOfCalculs[calculId].toString();
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' name='calc' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + "" + " > </td > </tr ></table > ";
+			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' class='calc' name='calc' value=''> </td> <td> <input type='text' id='answ0' class='answ' value=" + "" + " > </td > </tr ></table > ";
+
+            const collection = document.getElementsByClassName("answ");
+
+            for (let i = 0; i < collection.length; i++) {
+				collection[i].style.backgroundColor = "#11aabb";
+			}
 
             numberOfCalculs += 1;
 		}
@@ -116,19 +123,41 @@
             var cell4 = row.insertCell(3);
 			cell1.innerHTML = "";
 			cell2.innerHTML = calcul.toString();
-            cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs) + " name='calc' value=''>";
-            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs) + " class='answ' value=" + "" + ">";
+            cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs) + " class='calc' value=''>";
+            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs) + " class='answ' value=''>";
 
 			numberOfCalculs += 1;
 
 			hiddenResponse();
         }
 
+        function hiddenResponse() {
+            const collection = document.getElementsByClassName("answ");
+
+            for (let i = 0; i < collection.length; i++) {
+				collection[i].style.backgroundColor = "#11aabb";
+            }
+		}
+
 		function showResponse() {
             for (i = 0; i < numberOfCalculs; i++) {
                 let answer = getResponseById(i);
                 document.getElementById("answ".concat(i)).value = 'la solution est : '.concat(answer.toString());
 			}
+
+			const collectioncalc = document.getElementsByClassName("calc");
+
+			for (let j = 0; j < collectioncalc.length; j++) {
+                //if (document.getElementById("calc".concat(i)).value != getResponseById(i)) {
+                    collectioncalc[j].style.backgroundColor = "red";
+                //}
+			}
+
+            const collectionansw = document.getElementsByClassName("answ");
+
+            for (let i = 0; i < collectionansw.length; i++) {
+                collectionansw[i].style.backgroundColor = "FFFFFF";
+            }
 		}
 
 		function getResponseById(id) {
@@ -151,12 +180,6 @@
             }
 
 			return numberOfErrors;
-		}
-
-        function hiddenResponse() {
-            //for (i = 0; i < numberOfCalculs; i++) {
-            //    document.getElementById("answ".concat(i)).value = '');
-            //}
 		}
 
 		let listOfCalculs = [
