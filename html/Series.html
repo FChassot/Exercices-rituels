@@ -16,7 +16,6 @@
 
 	<script>
         size = randomValue();
-		numberofrows = 0;
 		numberOfErrors = 0;
 		numberOfCalculs = 0;
 		numberOfCalculsMax = document.getElementById("maxValue").value;
@@ -26,7 +25,6 @@
 
 		function initialize() {
 			hiddenResponse();
-            numberOfErrors = 0;
 			numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
 			listOfCalculResponse.length = 0;
@@ -36,9 +34,9 @@
 
 			fillListOfUserResponse();
 
-			var errors = getNumberOfErrors();
-
-			alert("Vous avez " + errors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors) / (numberOfCalculs / 5))) + ")");
+			var numberOfErrors = getNumberOfErrors();
+			numberOfErrors = 0;
+            alert("Vous avez " + numberOfErrors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors) / (numberOfCalculs / 5))) + ")");
 
 			showResponse();
 		}
@@ -50,9 +48,7 @@
 
 		function start() {
             numberOfCalculsMax = document.getElementById("maxValue").value;
-            numberOfErrors = 0;
 			numberOfCalculs = 0;
-			numberofrows = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
 			listOfCalculResponse.length = 0;
 
@@ -83,7 +79,6 @@
 			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' name='calc' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + "" + " > </td > </tr ></table > ";
 
             numberOfCalculs += 1;
-			numberofrows += 1;
 		}
 
 		function next() {
@@ -114,7 +109,7 @@
             listOfCalculResponse[numberOfCalculs] = defanswer;
 
 			var table = document.getElementById("myTable");
-            var row = table.insertRow(numberofrows);
+            var row = table.insertRow(numberOfCalculs);
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
 			var cell3 = row.insertCell(2);
@@ -125,7 +120,7 @@
             cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs) + " class='answ' value=" + "" + ">";
 
 			numberofrows += 1; 
-			numberOfCalculs = numberOfCalculs + 1;
+			numberOfCalculs += 1;
 
 			hiddenResponse();
         }
@@ -133,7 +128,7 @@
 		function showResponse() {
             for (i = 0; i < numberOfCalculs; i++) {
                 let answer = getResponseById(i);
-                document.getElementById("answ".concat(i)).value = 'la réponse est : '.concat(answer.toString());
+                document.getElementById("answ".concat(i)).value = 'la solution est : '.concat(answer.toString());
 			}
 		}
 
