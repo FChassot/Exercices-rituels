@@ -8,7 +8,7 @@
 	<h1> Exercices rituels (s&#233;ries 1-35) </h1>
 	<p>
 		<input type="button" class="main" id="start" value="Start" onclick="generateCalcTable();" /> <input type="button" id="next" value="Next" onclick="next();" /> <input type="button" id="check" value="Verify" onclick="checker();" />
-		Nombre de calculs<input type='text' class='resp' name='resp' value="30">
+		Nombre de calculs<input type='text' id="maxValue" class='resp' name='resp' value="30">
 
 		<div id="newCalcTable" class="main" />
 <p>
@@ -16,14 +16,13 @@
 
 	<script>
         size = randomValue();
-		sizetable = 0;
 		numberofrows = 0;
 		insertmode = true;
 		doublemode = true;
 		numberOfErrors = 0;
 		numberOfCalculs = 0;
 		previouslySize = "";
-		numberOfCalculsMax = 10;
+		numberOfCalculsMax = document.getElementById("maxValue").value;
 
 		function init() {
             document.getElementById('start').style.visibility = 'visible';
@@ -65,8 +64,8 @@
 		}
 
 		function generateCalcTable() {
+            numberOfCalculsMax = document.getElementById("maxValue").value;
             size = randomValue();
-            sizetable = 0;
             numberofrows = 0;
             insertmode = true;
 			doublemode = true;
@@ -143,11 +142,12 @@
                     var cell1 = row.insertCell(0);
                     var cell2 = row.insertCell(1);
 					var cell3 = row.insertCell(2);
-                    var cell4 = row.insertCell(3);
+					var cell4 = row.insertCell(3);
                     cell1.innerHTML = "";
                     cell2.innerHTML = calcul.toString();
 					cell3.innerHTML = "<input type='text' id='calc1' name='calc1' value=''>";
-                    cell4.innerHTML = "<input type='text' name='resp' value=" + defanswer + ">";
+					cell4.innerHTML = "<input type='text' name='resp' value=" + defanswer + ">";
+
 					numberofrows += 1;
 				}
 			}
