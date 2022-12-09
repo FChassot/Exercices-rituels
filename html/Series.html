@@ -7,7 +7,7 @@
 <body bgcolor ="#11aabb" onload="initialize();">
 	<h1> Exercices rituels (s&#233;ries 1-35) </h1>
 	<p>
-		<input type="button" class="main" id="start" value="Start" onclick="start();" /> <input type="button" id="next" value="Next" onclick="next();" /> <input type="button" id="check" value="Verify" onclick="verify();" />
+		<input type="button" class="main" id="start" value="Demarrer un test" onclick="start();" /> <input type="button" id="next" value="Prochain calcul" onclick="next();" /> <input type="button" id="check" value="Verifier" onclick="verify();" />
 		Nombre de calculs<input type='text' id="maxValue" class='resp' name='resp' value="30">
 
 		<div id="newCalcTable" class="main" />
@@ -21,6 +21,7 @@
 		numberOfCalculs = 0;
 		numberOfCalculsMax = document.getElementById("maxValue").value;
 		const listOfAlreadyProcessedCalcul = [];
+		const listOfUserResponse = [];
 		const listOfCalculResponse = [];
 
 		function initialize() {
@@ -33,7 +34,11 @@
 
 		function verify() {
 
-			alert("Vous avez " + numberOfErrors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors) / (numberOfCalculs / 5))) + ")");
+			fillListOfUserResponse();
+
+			var errors = getNumberOfErrors();
+
+			alert("Vous avez " + errors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors) / (numberOfCalculs / 5))) + ")");
 
 			showResponse();
 		}
@@ -46,7 +51,8 @@
 		function start() {
             numberOfCalculsMax = document.getElementById("maxValue").value;
             numberOfErrors = 0;
-            numberOfCalculs = 0;
+			numberOfCalculs = 0;
+			numberofrows = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
 			listOfCalculResponse.length = 0;
 
@@ -74,7 +80,7 @@
 
 			let calculStr = listOfCalculs[size].toString();
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> <b>" + calcul.toString() + "</b> </td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + "" + " > </td > </tr ></table > ";
+			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' name='calc' value=''> </td> <td class='resp'> <input type='text' id='answ0' name='answ' value=" + "" + " > </td > </tr ></table > ";
 
             numberOfCalculs += 1;
 			numberofrows += 1;
@@ -107,7 +113,6 @@
 			defanswer = answer.toString().substr(indexation + 2);
             listOfCalculResponse[numberOfCalculs] = defanswer;
 
-			console.log(numberOfCalculs);
 			var table = document.getElementById("myTable");
             var row = table.insertRow(numberofrows);
 			var cell1 = row.insertCell(0);
@@ -126,8 +131,6 @@
         }
 
 		function showResponse() {
-			console.log(numberOfCalculs);
-
             for (i = 0; i < numberOfCalculs; i++) {
                 let answer = getResponseById(i);
                 document.getElementById("answ".concat(i)).value = 'la réponse est : '.concat(answer.toString());
@@ -136,6 +139,24 @@
 
 		function getResponseById(id) {
             return listOfCalculResponse[i];
+		}
+
+		function fillListOfUserResponse() {
+            for (i = 0; i < numberOfCalculs; i++) {
+				listOfUserResponse[0] = document.getElementById("calc".concat(i));
+			}
+		}
+
+		function getNumberOfErrors() {
+			let numberOfErrors = 0;
+
+			for (i = 0; i < numberOfCalculs; i++) {
+                if (document.getElementById("calc".concat(i)) != getResponseById(i)) {
+					numberOfErrors += 1;
+				}
+            }
+
+			return numberOfErrors;
 		}
 
         function hiddenResponse() {
