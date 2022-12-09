@@ -1,0 +1,200 @@
+<html>
+<head>
+	<title> </title>
+	<link rel="stylesheet" href="./css/main1.css">
+	<script src="./js/exercice.js"></script>
+</head>
+<body bgcolor ="#11aabb" onload="init();">
+	<h1> Exercices rituels (séries 1 à 35) </h1>
+	<p>
+    <input type="button" class="main" id="start" value="Start" onclick="generateCalcTable();"/> <input type="button" id="next" value="Next" onclick="next();" /> <input type="button" id="check" value="Verify" onclick="checker();"/> 
+
+	<div id="newCalcTable" class="main"/>
+	<p>
+	<div id="footer"></div>
+
+	<script>
+        size = randomValue();
+		sizetable = 0;
+		numberofrows = 0;
+		insertmode = true;
+		doublemode = true;
+		numberOfErrors = 0;
+		numberOfCalculs = 0;
+		previouslySize = "";
+
+		function init() {
+            document.getElementById('start').style.visibility = 'visible';
+            document.getElementById('check').style.visibility = 'visible';
+            document.getElementById('next').style.visibility = 'visible';
+			document.getElementsByClassName('resp').style.visibility = 'hidden';
+            cacheResponse();
+		}
+
+		function checker() {
+			let lvalue = document.getElementById("calc1").value;
+
+			alert("Vous avez " + numberOfErrors + " erreurs sur " + numberOfCalculs + " calculs! (moyenne: " + (1 + ((numberOfCalculs - numberOfErrors)/(numberOfCalculs / 5))) + ")");
+
+			//if (lvalue == "") {
+			//	alert("Remplissez le champ!");
+			//}
+			//else {
+			//	answer = listOfCalculs[size].toString();
+			//	indexation = answer.indexOf('=');
+			//	defanswer = answer.toString().substr(indexation + 2);
+
+   //             if (defanswer == document.getElementById("calc1").value) {
+			//		alert("La réponse est correcte!");
+			//	}
+			//	else {
+			//		answer = listOfCalculs[size].toString();
+			//		indexation = answer.indexOf('=');
+   //                 alert("La réponse est fausse! La solution au problème est: " + defanswer);
+			//	}
+			//}
+		}
+
+		function randomValue() {
+			var random_int = Math.floor(Math.random() * 31);
+			return random_int;
+		}
+
+		function generateCalcTable() {
+            size = randomValue();
+            sizetable = 0;
+            numberofrows = 0;
+            insertmode = true;
+            doublemode = true;
+            numberOfErrors = numberOfErrors + 1;
+			numberOfCalculs = numberOfCalculs + 1;
+            document.getElementById('start').style.disable = 'true';
+			document.getElementById('check').style.visibility = 'visible';
+			document.getElementById('next').style.visibility = 'visible';
+            answer = listOfCalculs[size].toString();
+            indexation = answer.indexOf('=');
+			defanswer = answer.toString().substr(indexation + 2);
+
+			let calculStr = listOfCalculs[size].toString();
+			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
+			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text'  name='resp' value=" + defanswer + " > </td > </tr ></table > ";
+			document.getElementById('line').innerHTML = "<tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td> <input type='text' class='resp' name='resp' value=" + defanswer + "> </td ></tr > ";
+			numberofrows += 1;
+		}
+
+		function insert() {
+			numberOfErrors = numberOfErrors + 1;
+            numberOfCalculs = numberOfCalculs + 1;
+			size = randomValue();
+			answer = listOfCalculs[size].toString();
+			indexation = answer.indexOf('=');
+			defanswer = answer.toString().substr(indexation + 2);
+            let calculStr = listOfCalculs[size].toString();
+			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
+			document.getElementById('line').innerHTML = "<tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' name='resp' value=" + defanswer + "> </td></tr>";
+			numberofrows += 1;
+		}
+
+		function next() {
+			numberOfCalculs = numberOfCalculs + 1;
+            //numberOfErrors = numberOfErrors + 1;
+
+			if (insertmode) {
+				if (doublemode) {
+                    size = randomValue();
+					let calculStr = listOfCalculs[size].toString();
+					let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
+                    answer = listOfCalculs[size].toString();
+                    indexation = answer.indexOf('=');
+                    defanswer = answer.toString().substr(indexation + 2);
+                    previouslySize = size;
+					var table = document.getElementById("myTable");
+                    var row = table.insertRow(numberofrows);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+                    var cell4 = row.insertCell(3);
+					cell1.innerHTML = "";
+					cell2.innerHTML = calcul.toString();
+					cell3.innerHTML = "<input type='text' id='calc1' name='calc1' value=''>";
+                    cell4.innerHTML = "<input type='text' name='resp' value=" + defanswer + ">";
+					numberofrows += 1; 
+				}
+				else {
+                    size = randomValue();
+                    let calculStr = listOfCalculs[size].toString();
+					let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
+                    answer = listOfCalculs[size].toString();
+                    indexation = answer.indexOf('=');
+                    defanswer = answer.toString().substr(indexation + 2);
+                    previouslySize = size;
+                    var table = document.getElementById("myTable");
+                    var row = table.insertRow(0);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+                    var cell4 = row.insertCell(3);
+                    cell1.innerHTML = "";
+                    cell2.innerHTML = calcul.toString();
+					cell3.innerHTML = "<input type='text' id='calc1' name='calc1' value=''>";
+                    cell4.innerHTML = "<input type='text' name='resp' value=" + defanswer + ">";
+					numberofrows += 1;
+				}
+			}
+			else {
+                size = randomValue();
+                let calculStr = listOfCalculs[size].toString();
+				let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
+                previouslySize = size;
+                document.getElementById('line').innerHTML = "<tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc1' name='calc1' value=''> </td> <td class='resp'> <input type='text' name='resp' value='juste'> </td></tr>";
+				numberofrows += 1;
+			}
+
+			cacheResponse();
+        }
+
+		function displayResponses() {
+            document.getElementsByClassName('resp').visibility = 'visible';
+		}
+
+		function cacheResponse() {
+			document.getElementsByClassName('resp').visibility = 'hidden';
+		}
+
+		let listOfCalculs = [
+			['(12 + 12) - (12 + 12) =', '0'],
+			['12 + 12 - 12 + 12 =', '24'],
+			['Que vaut le double du produit de 12 par 4? =', '24'],
+			['6 + 4 x 3 =', '18'],
+			['14 - 4^2 =', '-2'],
+			['12 - (-12) x 4 =', '60'],
+            ['9 - (-9) x 3 =', '36'],
+            ['24 : (2 + 3 x 2) =', '3'],
+            ['(-16) + (-3) =', '-19'],
+            ['Que vaut la différence du carré de 7 et du cube de 3 ? =', '22'],
+            ['3^3 : 3 =', '9'],
+			['4^3 - 6^2 =', '28'],
+            ['32 : 4^2 =', '2'],
+            ['-29 - 28 =', '-57'],
+            ['Je choisis un nombre, jajoute 8 et je multiplie le résultat par 5. Jobtiens 60. Quel est ce nombre ? =', '4'],
+            ['-27 -27 + (-27) - (-27) =', '-54'],
+            ['Ajoute, si nécessaire, des parenthèses pour obtenir le résultat souhaité =', '...'],
+			['-28 + 2 x 2^2 =', '-224'],
+            ['13 - 3 x 3^3 =', '-14'],
+            ['18 + 12 - (-7) + (-21) =', '16'],
+            ['Que vaut la somme du carré de 6 et de la différence de 15 et 4? =', '47'],
+            ['Calcule la somme de 17.4 et du quotient de 2.1 par 3 =', '18.1'],
+            ['45 - (12 + 3^2 x 4) =', '-3'],
+			['(-10) + (-13) - (-24) =', '1'],
+			['5 + 5 x 4 - 4 : 2 =', '23'],
+            ['Que vaut le cube de 8 ? =', '512'],
+            ['Que vaut la somme des angles dun triangle? =', '180'],
+            ['104 : (-104) =', '-1'],
+            ['Je divise un nombre par (-12) et obtiens (-13). Quel est ce nombre ? =', '156'],
+            ['(-24) : (-3) =', '8'],
+            ['7.6 x 1.1 =', '8.36'],
+		];
+
+	</script>
+</body>
+</html>
