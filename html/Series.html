@@ -7,10 +7,11 @@
 <body bgcolor ="#11aabb" onload="init();">
 	<h1> Exercices rituels (s&#233;ries 1-35) </h1>
 	<p>
-    <input type="button" class="main" id="start" value="Start" onclick="generateCalcTable();"/> <input type="button" id="next" value="Next" onclick="next();" /> <input type="button" id="check" value="Verify" onclick="checker();"/> 
+		<input type="button" class="main" id="start" value="Start" onclick="generateCalcTable();" /> <input type="button" id="next" value="Next" onclick="next();" /> <input type="button" id="check" value="Verify" onclick="checker();" />
+		Nombre de calculs<input type='text' class='resp' name='resp' value="30">
 
-	<div id="newCalcTable" class="main"/>
-	<p>
+		<div id="newCalcTable" class="main" />
+<p>
 	<div id="footer"></div>
 
 	<script>
@@ -29,7 +30,9 @@
             document.getElementById('check').style.visibility = 'visible';
             document.getElementById('next').style.visibility = 'visible';
 			document.getElementsByClassName('resp').style.visibility = 'hidden';
-            cacheResponse();
+			cacheResponse();
+            numberOfErrors = 0;
+            numberOfCalculs = 0;
 		}
 
 		function checker() {
@@ -66,7 +69,8 @@
             sizetable = 0;
             numberofrows = 0;
             insertmode = true;
-            doublemode = true;
+			doublemode = true;
+            numberOfCalculs = 0;
             numberOfErrors = numberOfErrors + 1;
 			numberOfCalculs = numberOfCalculs + 1;
             document.getElementById('start').style.disable = 'true';
