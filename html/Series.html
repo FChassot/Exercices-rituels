@@ -48,7 +48,7 @@
 		}
 
 		function start() {
-			numberOfCalculsMax = 30; //document.getElementById("maxValue").value;
+			numberOfCalculsMax = document.getElementById("maxValue").value;
 			numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
 			listOfCalculResponse.length = 0;
@@ -142,14 +142,14 @@
 		function showResponse() {
             for (i = 0; i < numberOfCalculs; i++) {
                 let answer = getResponseById(i);
-                document.getElementById("answ".concat(i)).value = 'la solution est : '.concat(answer.toString());
+                document.getElementById("answ".concat(i)).value = answer.toString();
 			}
 
 			const collectioncalc = document.getElementsByClassName("calc");
 
 			for (let j = 0; j < collectioncalc.length; j++) {
                 //if (document.getElementById("calc".concat(i)).value != getResponseById(i)) {
-                    collectioncalc[j].style.backgroundColor = "red";
+                collectioncalc[j].style.backgroundColor = "#E65100";
                 //}
 			}
 
@@ -224,7 +224,7 @@
             ['17 - 7 x 2^2 =', '-11'],
             ['(-3)^4 =', '81'],
             ['(-5)^2 : sqrt(25) =', '-5'],
-            ['xxx =', 'xxx'],
+/*            ['xxx =', 'xxx'],*/
 			['147 + 48 + 33 + 42 =', '270'],
 
             ['21 - 11 x 3 + sqrt(81) =', '-3'],
