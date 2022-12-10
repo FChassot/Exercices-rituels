@@ -77,7 +77,7 @@
 
             let calculStr = listOfCalculs[calculId].toString();
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' class='calc' name='calc' value=''> </td> <td> <input type='text' id='answ0' class='answ' value=" + "" + " > </td > </tr ></table > ";
+			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' class='calc' name='calc' value=''> </td> <td> <input type='text' id='answ0' class='answ' value=''> </td > </tr ></table > ";
 
             const collection = document.getElementsByClassName("answ");
 
@@ -147,10 +147,13 @@
 
 			const collectioncalc = document.getElementsByClassName("calc");
 
-			for (let j = 0; j < collectioncalc.length; j++) {
-                //if (document.getElementById("calc".concat(i)).value != getResponseById(i)) {
-                collectioncalc[j].style.backgroundColor = "#E65100";
-                //}
+            for (let j = 0; j < collectioncalc.length; j++) {
+                if (document.getElementById("calc".concat(j)).value != listOfCalculResponse[j]) {
+                    collectioncalc[j].style.backgroundColor = "#E65100";
+                }
+                else {
+                    collectioncalc[j].style.backgroundColor = "#00BCD4";
+                }
 			}
 
             const collectionansw = document.getElementsByClassName("answ");
@@ -246,10 +249,10 @@
             ['4^2 : 2 =', '8'],
             ['(-2)^4 =', '16'],
             ['-2^4 =', '-16'],
-            ['Determine la mesur de l&rsquo;angle alpha =', 'xxxx'],
+            ['Determine la mesure de l&rsquo;angle alpha =', 'xxxx'],
 			['-2^3 =', '-8'],
 
-            ['24 + 36 : 4 x 3 =', '51'],
+            ['24 + 36 : 4 x 3 =', '27'],
             ['3 x 2^3 - 5 x 2 - 2 =', '12'],
             ['(-50) x (-20) =', '1000'],
             ['SQRT(81) - 3^2 =', '0'],
