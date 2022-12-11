@@ -26,12 +26,13 @@
 		listOfAlreadyProcessedCalcul = [];
 		listOfUserResponse = [];
 		listOfCalculResponse = [];
+        takelistOfGeoCalcalcul = false;
 
 		function initialize() {
 			hiddenResponse();
 			numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
-			listOfCalculResponse.length = 0;
+            listOfCalculResponse.length = 0;
 		}
 
 		function verify() {
@@ -316,7 +317,7 @@
             ['Le produit de la somme de 7 et 8 par la difference de 30 et 4 =', '540'],
             ['Le carre de la somme de 6 et 5 =', '121'],
             ['5 x 6 + 24 : 3 x 2 =', '46'],
-/*            ['Quelles sont les mesures des angles d&apos;un triangle rectangle isocele ? =', '180 degre'],*/
+            /*['Quelles sont les mesures des angles d&apos;un triangle rectangle isocele ? =', '180 degre'],*/
             ['- 30 - (-6 - 10) + 5 =', '-9'],
             ['(-5) + (+15) - (-9) =', '19'],
 
@@ -324,7 +325,7 @@
             ['Calcule le quadruple de 34 =', '136'],
             ['Calcule le neuvième de 36 =', '4'],
             ['-25 - 3 x 6=', '-43'],
-            ['Complete : 3 - (-6) - ? est &#233;gale a 9', '0'],
+            ['Complete : 3 - (-6) - ? est &#233;gale a 9 =', '0'],
             ['100 - 2 x 25 - 4 x 3 =', '38'],
             /*['Calcule la mesure de l&rsquo;angle ACB = ', '19'],*/
             ['(13 + 17) x 5 - 3 x 2 =', '144'],
@@ -382,7 +383,7 @@
             ['Quelle est la valeur de l&rsquo;angle au centre d&rsquo;un octogone r&#233;gulier ? =', '360 degre'],
             ['2008^1 =', '2008'],
             ['10 x 10^4 : 10^3 =', '10^2'],
-            ['Voici un hexagone régulier. Calcule la mesure de l&rsquo;angle alpha =', '120 degre'],
+            ['Voici un hexagone r&#233;gulier. Calcule la mesure de l&rsquo;angle alpha =', '120 degre'],
             ['Que vaut la somme de 6 au carr&#233; et de 7 au carr&#233; =', '85'],
             ['-4^2 =', '-16'],
 
@@ -394,10 +395,10 @@
             ['(-7) + (-8) - (-9) - (-4) =', '-2'],
             ['2^3 x (10 - 4 x 3) =', '-16'],
 
-            //['Construis un hexagone régulier dont le coté mesure 2 cm =', '24'],
+            ['Construis un hexagone r&#233;gulier dont le cot&#233; mesure 2 cm =', '24'],
             ['SQRT(-144) =', 'impossible'],
             ['11 x 6 + 4 x 12 =', '114'],
-            /*['Trace les trois hauteurs de ce triangle =', 'xxx'],*/
+            ['Trace les trois hauteurs d&rsquo;untriangle =', 'xxx'],
             ['Je choisis un nombre. Je le divise par 8 et j&rsquo;enleve 15 au r&#233;sultat obtenu. J&rsquo;obtiens -6. Quel est ce nombre ? =', '72'],
 
             ['[47 - (10 + 17)] : 4 =', '5'],
@@ -442,7 +443,7 @@
             ['[(-8) + (+3)]^3 - 8 x (-5)^2 =', '-325'],
             ['-70 - 60 x (-2)^3 =', '410'],
             ['Une montgolfiere situ&#233;e juste en bord de mer (0 m) s&#233;leve de 223 m. Avant de descendre de 149 m, elle remonte de 42 m. A quelle altitude se retrouve-t-elle ? =', '116 m'],
-/*            ['Trace le cercle inscrit d&rsquo;un triangle =', 'xxx'],*/
+            /*['Trace le cercle inscrit d&rsquo;un triangle =', 'xxx'],*/
 		];
 
 
