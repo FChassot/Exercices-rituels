@@ -24,7 +24,6 @@
 		listOfUserResponse = [];
 		listOfCalculResponse = [];
         takelistOfGeoCalcalcul = false;
-        listOfRandomValues = [];
 
         function initialize() {
             takelistOfGeoCalcalcul = false;
@@ -32,7 +31,6 @@
 			numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
             listOfCalculResponse.length = 0;
-            listOfRandomValues.length = 0;
 		}
 
 		function verify() {
@@ -48,31 +46,31 @@
 		}
 
         function getUniqueRandomValue() {
-            //let localRandomValue;
-            //let rValueAlreadyFound = false;
+            let localRandomValue;
+            let rValueAlreadyFound = false;
 
-            //if (listOfRandomValues.length == 195) {
-            //    alert("all the questions!");
-            //    verify();
-            //    return;
-            //}
+            if (listOfAlreadyProcessedCalcul.length == 195) {
+                alert("all the questions!");
+                verify();
+                return;
+            }
 
-            //while (listOfRandomValues.length > 195) {
-            //    localRandomValue = randomValue();
+            while (listOfAlreadyProcessedCalcul.length < 195) {
+                localRandomValue = randomValue();
 
-            //    for (i = 0; i < listOfRandomValues; i++) {
-            //        if (listOfRandomValues[i] == localRandomValue) {
-            //            rValueAlreadyFound = true;
-            //        }
-            //    }
+                for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
+                    if (listOfAlreadyProcessedCalcul[i] == localRandomValue) {
+                        rValueAlreadyFound = true;
+                    }
+                }
 
-            //    if (rValueAlreadyFound == false) {
-            //        listOfRandomValues[listOfRandomValues.length] = localRandomValue;
-            //        return localRandomValue;
-            //    }
-            //}
-            var random_int = Math.floor(Math.random() * 195);
-            return random_int;
+                if (rValueAlreadyFound == false) {
+                    return localRandomValue;
+                }
+            }
+
+            //var random_int = Math.floor(Math.random() * 195);
+            //return random_int;
         }
 
         function randomValue() {
@@ -100,15 +98,6 @@
 
         function generateCalcTable() {
             calculId = getUniqueRandomValue();
-
-			//for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
-   //             if (listOfAlreadyProcessedCalcul[i] == calculId) {
-   //                 calculId = randomValue();
-			//	}
-			//	else {
-			//		break;
-			//	}
-			//}
 
             listOfAlreadyProcessedCalcul[0] = calculId;
 
@@ -149,16 +138,6 @@
 			}
 
             calculId = getUniqueRandomValue();
-            //calculId = randomValue();
-
-            //for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
-            //    if (listOfAlreadyProcessedCalcul[0] == calculId) {
-            //        calculId = randomValue();
-            //    }
-            //    else {
-            //        break;
-            //    }
-            //}
 
             listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = calculId;
 
