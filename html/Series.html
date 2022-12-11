@@ -119,7 +119,7 @@
             }
 
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
-			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' class='calc' name='calc' value=''> </td> <td> <input type='text' id='answ0' class='answ' value=''> </td > </tr ></table > ";
+			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 1><tr id = 'line'> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' class='calc' name='calc' value=''> </td> <td> <input type='text' id='answ0' class='answ' value=''> </td > </tr ></table > ";
 
             const collection = document.getElementsByClassName("answ");
 
@@ -161,11 +161,9 @@
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
 			var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-			cell1.innerHTML = "";
-			cell2.innerHTML = calcul.toString();
-            cell3.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs) + " class='calc' value=''>";
-            cell4.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs) + " class='answ' value=''>";
+			cell1.innerHTML = calcul.toString();
+            cell2.innerHTML = "<input type='text' id=" + "calc".concat(numberOfCalculs) + " class='calc' value=''>";
+            cell3.innerHTML = "<input type='text' id=" + "answ".concat(numberOfCalculs) + " class='answ' value=''>";
 
 			numberOfCalculs += 1;
 
