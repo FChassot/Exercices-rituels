@@ -8,10 +8,7 @@
 	<h1> Exercices rituels (s&#233;ries 1-35) </h1>
     <p>
         <input type="button" class="main" id="start" value="Demarrer un test" onclick="start();" /> <input type="button" id="next" value="Prochain calcul" onclick="next();" /> <input type="button" id="check" value="Verifier" onclick="verify();" />
-        <select name=" optionlist " onChange="combo(this, 'demo')">
-            <option>tous</option>
-            <option>seulement les questions de géométrie</option>
-        </select>
+        Seulement les questions de geometrie<input type="checkbox" class="main" id="onlyGeo" value="Demarrer un test" onclick="onlyGeo();" />
         Nombre de calculs<input type='text' id="maxValue" class='resp' name='numbercalc' value="30">
 
         <div id="newCalcTable" class="main" />
@@ -51,6 +48,10 @@
 			var random_int = Math.floor(Math.random() * 190);
 			return random_int;
 		}
+
+        function onlyGeo() {
+            takelistOfGeoCalcalcul = true;
+        }
 
 		function start() {
 			numberOfCalculsMax = document.getElementById("maxValue").value;
