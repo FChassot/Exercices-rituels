@@ -25,7 +25,8 @@
 		listOfCalculResponse = [];
         takelistOfGeoCalcalcul = false;
 
-		function initialize() {
+        function initialize() {
+            takelistOfGeoCalcalcul = false;
 			hiddenResponse();
 			numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
@@ -44,8 +45,8 @@
 			showResponse();
 		}
 
-		function randomValue() {
-			var random_int = Math.floor(Math.random() * 190);
+        function randomValue() {
+            var random_int = Math.floor(Math.random() * 190);
 			return random_int;
 		}
 
@@ -76,12 +77,23 @@
 
             listOfAlreadyProcessedCalcul[0] = calculId;
 
-            answer = listOfCalculs[calculId].toString();
+            if (takelistOfGeoCalcalcul == true) {
+                answer = listOfGeoCalculs[calculId].toString();
+            }
+            else {
+                answer = listOfCalculs[calculId].toString();
+            }
+
             indexation = answer.indexOf('=');
 			defanswer = answer.toString().substr(indexation + 2);
 			listOfCalculResponse[0] = defanswer;
 
             let calculStr = listOfCalculs[calculId].toString();
+
+            if (takelistOfGeoCalcalcul == true) {
+                calculStr = listOfGeoCalculs[calculId].toString();
+            }
+
 			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
 			document.getElementById('newCalcTable').innerHTML = "<table id='myTable' border = 0><tr id = 'line'> <td> </td> <td> " + calcul.toString() + "</td> <td> <input type='text' id='calc0' class='calc' name='calc' value=''> </td> <td> <input type='text' id='answ0' class='answ' value=''> </td > </tr ></table > ";
 
@@ -115,8 +127,16 @@
             listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = calculId;
 
             let calculStr = listOfCalculs[calculId].toString();
-			let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
+
+            if (takelistOfGeoCalcalcul == true) {
+                calculStr = listOfGeoCalculs[calculId].toString();
+            }
+            let calcul = calculStr.substr(0, calculStr.indexOf('=') + 1);
+
             answer = listOfCalculs[calculId].toString();
+            if (takelistOfGeoCalcalcul == true) {
+                answer = listOfGeoCalculs[calculId].toString();
+            }
             indexation = answer.indexOf('=');
 			defanswer = answer.toString().substr(indexation + 2);
             listOfCalculResponse[numberOfCalculs] = defanswer;
@@ -481,7 +501,6 @@
             ['Que doit-on faire pour tracer le cercle inscrit d&rsquo;un triangle =', 'tracer les bissectrices'],
             ['Comment doit-on faire pour trouver le centre du cercle inscrit dans un triangle ? =', 'tracer les bissectrices'],
             ['Comment doit-on faire pour trouver le centre du cercle circonscrit a un triangle ? =', 'tracer au moins deux mediatrices'],
-            ['[(-8) + (+3)]^3 - 8 x (-5)^2 =', '-325'],
         ];
 	</script>
 </body>
