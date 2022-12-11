@@ -24,6 +24,7 @@
 		listOfUserResponse = [];
 		listOfCalculResponse = [];
         takelistOfGeoCalcalcul = false;
+        listOfRandomValues = [];
 
         function initialize() {
             takelistOfGeoCalcalcul = false;
@@ -31,6 +32,7 @@
 			numberOfCalculs = 0;
 			listOfAlreadyProcessedCalcul.length = 0;
             listOfCalculResponse.length = 0;
+            listOfRandomValues.length = 0;
 		}
 
 		function verify() {
@@ -45,8 +47,36 @@
 			showResponse();
 		}
 
+        function getUniqueRandomValue() {
+            //let localRandomValue;
+            //let rValueAlreadyFound = false;
+
+            //if (listOfRandomValues.length == 195) {
+            //    alert("all the questions!");
+            //    verify();
+            //    return;
+            //}
+
+            //while (listOfRandomValues.length > 195) {
+            //    localRandomValue = randomValue();
+
+            //    for (i = 0; i < listOfRandomValues; i++) {
+            //        if (listOfRandomValues[i] == localRandomValue) {
+            //            rValueAlreadyFound = true;
+            //        }
+            //    }
+
+            //    if (rValueAlreadyFound == false) {
+            //        listOfRandomValues[listOfRandomValues.length] = localRandomValue;
+            //        return localRandomValue;
+            //    }
+            //}
+            var random_int = Math.floor(Math.random() * 195);
+            return random_int;
+        }
+
         function randomValue() {
-            var random_int = Math.floor(Math.random() * 215);
+            var random_int = Math.floor(Math.random() * 195);
 			return random_int;
 		}
 
@@ -68,17 +98,17 @@
 			generateCalcTable();
 		}
 
-		function generateCalcTable() {
-            calculId = randomValue();
+        function generateCalcTable() {
+            calculId = getUniqueRandomValue();
 
-			for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
-                if (listOfAlreadyProcessedCalcul[i] == calculId) {
-                    calculId = randomValue();
-				}
-				else {
-					break;
-				}
-			}
+			//for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
+   //             if (listOfAlreadyProcessedCalcul[i] == calculId) {
+   //                 calculId = randomValue();
+			//	}
+			//	else {
+			//		break;
+			//	}
+			//}
 
             listOfAlreadyProcessedCalcul[0] = calculId;
 
@@ -118,16 +148,17 @@
 				return;
 			}
 
-            calculId = randomValue();
+            calculId = getUniqueRandomValue();
+            //calculId = randomValue();
 
-            for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
-                if (listOfAlreadyProcessedCalcul[0] == calculId) {
-                    calculId = randomValue();
-                }
-                else {
-                    break;
-                }
-            }
+            //for (i = 0; i < listOfAlreadyProcessedCalcul; i++) {
+            //    if (listOfAlreadyProcessedCalcul[0] == calculId) {
+            //        calculId = randomValue();
+            //    }
+            //    else {
+            //        break;
+            //    }
+            //}
 
             listOfAlreadyProcessedCalcul[numberOfCalculs - 1] = calculId;
 
@@ -460,7 +491,7 @@
             ['(-16) + (-44) + (-15) + (+75) =', '0'],
             /*['Trace les 3 hauteurs de ce triangle =', 'xxx'],*/
             ['Le lac de Constance se trouve a 399 m au-dessus du niveau de la mer. La mer Morte se trouve a 395 m au-dessous du niveau de la mer. Quelle est leur différence d&rsquo;altitude ? =', '794 m'],
-            ['Comment doit-on faire pour trouver le centre du cercle inscrit dans un triangle ? =', 'tracer les bissectrices'],
+            ['Comment doit-on faire pour trouver le centre du cercle inscrit dans un triangle ? =', 'tracer au moins deux bissectrices'],
 
             ['Que doit-on faire pour tracer le cercle inscrit d&rsquo;un triangle =', 'tracer les bissectrices'],
             ['9 x 10^2 + 2 x (-2)^3 =', '884'],
@@ -497,7 +528,7 @@
             ['Comment se nomme la droite qui se trouve a &#233;gale distance de deux points ? =', 'mediatrice'],
             ['Quelle est la valeur de l&rsquo;angle au centre d&rsquo;un hexagone r&#233;gulier ? =', '60 degre'],
             ['Que doit-on faire pour tracer le cercle inscrit d&rsquo;un triangle =', 'tracer les bissectrices'],
-            ['Comment doit-on faire pour trouver le centre du cercle inscrit dans un triangle ? =', 'tracer les bissectrices'],
+            ['Comment doit-on faire pour trouver le centre du cercle inscrit dans un triangle ? =', 'tracer au moins deux bissectrices'],
             ['Comment doit-on faire pour trouver le centre du cercle circonscrit a un triangle ? =', 'tracer au moins deux mediatrices'],
         ];
 	</script>
