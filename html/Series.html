@@ -6,11 +6,15 @@
 </head>
 <body bgcolor ="#11aabb" onload="initialize();">
 	<h1> Exercices rituels (s&#233;ries 1-35) </h1>
-	<p>
-		<input type="button" class="main" id="start" value="Demarrer un test" onclick="start();" /> <input type="button" id="next" value="Prochain calcul" onclick="next();" /> <input type="button" id="check" value="Verifier" onclick="verify();" />
-		Nombre de calculs<input type='text' id="maxValue" class='resp' name='numbercalc' value="30">
+    <p>
+        <input type="button" class="main" id="start" value="Demarrer un test" onclick="start();" /> <input type="button" id="next" value="Prochain calcul" onclick="next();" /> <input type="button" id="check" value="Verifier" onclick="verify();" />
+        <select name=" optionlist " onChange="combo(this, 'demo')">
+            <option>tous</option>
+            <option>seulement les questions de géométrie</option>
+        </select>
+        Nombre de calculs<input type='text' id="maxValue" class='resp' name='numbercalc' value="30">
 
-		<div id="newCalcTable" class="main" />
+        <div id="newCalcTable" class="main" />
 <p>
 	<div id="footer"></div>
 
@@ -191,32 +195,37 @@
 			['Que vaut le double du produit de 12 par 4? =', '96'],
 			['6 + 4 x 3 =', '18'],
 			['14 - 4^2 =', '-2'],
-			['12 - (-12) x 4 =', '60'],
+            ['12 - (-12) x 4 =', '60'],
+
             ['9 - (-9) x 3 =', '36'],
             ['24 : (2 + 3 x 2) =', '3'],
             ['(-16) + (-3) =', '-19'],
             ['Que vaut la diff&#233;rence du carr&#233; de 7 et du cube de 3 ? =', '22'],
             ['3^3 : 3 =', '9'],
-			['4^3 - 6^2 =', '28'],
+            ['4^3 - 6^2 =', '28'],
+
             ['32 : 4^2 =', '2'],
             ['-29 - 28 =', '-57'],
             ['Je choisis un nombre, j&apos; ajoute 8 et je multiplie le r&#233;sultat par 5. J&apos;obtiens 60. Quel est ce nombre ? =', '4'],
             ['-27 - 27 + (-27) - (-27) =', '-54'],
             ['Ajoute, si n&#233cessaire, des parentheses pour obtenir le r&#233sultat souhait&#233 20 - 8 : 2 + 4 &#233gale a 2 =', '(20 - 8) : (2 + 4)'],
-			['-28 + 2 x 2^2 =', '-20'],
+            ['-28 + 2 x 2^2 =', '-20'],
+
             ['13 - 3 x 3^2 =', '-14'],
             ['18 + 12 - (-7) + (-21) =', '16'],
             ['Que vaut la somme du carr&#233 de 6 et de la diff&#233;rence de 15 et 4? =', '47'],
             ['Calcule la somme de 17.4 et du quotient de 2,1 par 3 =', '18,1'],
             ['45 - (12 + 3^2 x 4) =', '-3'],
 			['(-10) + (-13) - (-24) =', '1'],
-			['5 + 5 x 4 - 4 : 2 =', '23'],
+            ['5 + 5 x 4 - 4 : 2 =', '23'],
+
             ['Que vaut le cube de 8 ? =', '512'],
             ['Que vaut la somme des angles d&apos;un triangle ? =', '180 degre'],
             ['104 : (-104) =', '-1'],
             ['Je divise un nombre par (-12) et j&apos;obtiens (-13). Quel est ce nombre ? =', '156'],
             ['(-24) : (-3) =', '8'],
-			['7,6 x 1,1 =', '8,36'],
+            ['7,6 x 1,1 =', '8,36'],
+
 /*            ['??? =', '512'],*/
             ['10^0 =', '1'],
             ['Que vaut la somme de 6 au carr&#233 et de 8 au carr&#233 =', '100'],
@@ -352,7 +361,7 @@
             ['- 32 - 32 + (-32) - (-32) =', '-64'],
             ['Combien de cot&#233;s possede un pentagone r&#233;gulier ? =', '5'],
             ['3,75 + 6,25 x (-2)^2 =', '28,75'],
-            ['Quelle est la valeur de l&rsquo;angle au centre d&rsquo;un pentagone r&#233;gulier =', '72 degre'],
+            ['Quelle est la valeur de l&rsquo;angle au centre d&rsquo;un pentagone r&#233;gulier =', '108 degre'],
             ['10^4 : (-10^4) =', '-1'],
             ['1,2 x SQRT(144) - 0,2 x 60 =', '2,4'],
 
@@ -428,9 +437,35 @@
             ['-70 - 60 x (-2)^3 =', '410'],
             ['Une montgolfiere situ&#233;e juste en bord de mer (0 m) s&#233;leve de 223 m. Avant de descendre de 149 m, elle remonte de 42 m. A quelle altitude se retrouve-t-elle ? =', '116 m'],
 /*            ['Trace le cercle inscrit d&rsquo;un triangle =', 'xxx'],*/
-
 		];
 
+
+        let listOfGeoCalculs = [
+            ['Que vaut la somme des angles d&apos;un triangle ? =', '180 degre'],
+            ['Comment appelle-t-on un angle dont la mesure est comprise entre 90 et 180 degr&#233; ? =', 'obtus'],
+            ['Comment appelle-t-on un angle dont la mesure est de 89,5 degr&#233; ? =', 'aigu'],
+            ['Que vaut la somme des angles d&apos;un losange =', '360 degre'],
+            ['Qui suis-je ? Je possede 2 diagonales isom&#233;triques et se coupant en leur milieu en formant un angle de 60 degr&#233; =', 'rectangle'],
+            ['Quelles sont les mesures des angles d&apos;un triangle rectangle isocele ? =', '180 degre'],
+            ['Je suis un nombre non nul dont le carr&#233; et le cube sont &#233;gaux. Qui suis-je ? =', '1'],
+            ['Qui suis-je ? Je possede un axe de sym&#233;trie et une paire de cot&#233;s paralleles =', 'trapeze isocele'],
+            ['2 + 8 x 12 =', '98'],
+            ['Construis un triangle &#233;quilat&#233;ral de 3 cm de cot&#233; avec ta r&#233;gle et ton compas =', '30'],
+            ['Qui suis-je ? Je possede deux cot&#233;s isom&#233;triques et une paire de cot&#233;s parralleles =', 'trapeze isocele'],
+            ['Combien de cot&#233;s possede un pentagone r&#233;gulier ? =', '5'],
+            ['Quelle est la valeur de l&rsquo;angle au centre d&rsquo;un pentagone r&#233;gulier =', '108 degre'],
+            ['Quelle est la valeur de l&rsquo;angle au centre d&rsquo;un octogone r&#233;gulier ? =', '360 degre'],
+            ['Quelles sont les valeurs de l&rsquo;angle au centre et de l&rsquo;angle int&#233;rieur d&rsquo;un d&#233cagone r&#233;gulier ? =', '360 degre'],
+            ['Comment se nomme la droite qui coupe un segment perpendiculairement et en son milieu ? =', 'm&#233;diatrice'],
+            ['Comment sappelle la droite qui se trouve a &#233;gale distance deux droites s&#233;cantes ? =', 'bissectrice'],
+            ['Quelle droite faut-il tracer pour partager un angle en 2 parties isom&#233;triques ? =', 'bissectrice'],
+            ['Dans quelle forme g&#233;om&#233;trique les bissectrices et les m&#233;diatrices sont-elles cofondues ? =', 'triangle equilateral'],
+            ['Comment se nomme la droite qui se trouve a &#233;gale distance de deux points ? =', 'mediatrice'],
+            ['Quelle est la valeur de l&rsquo;angle au centre d&rsquo;un hexagone r&#233;gulier ? =', '60 degre'],
+            ['Que doit-on faire pour tracer le cercle inscrit d&rsquo;un triangle =', 'tracer les bissectrices'],
+            ['Comment doit-on faire pour trouver le centre du cercle circonscrit a un triangle ? =', 'tracer au moins deux mediatrices'],
+            ['[(-8) + (+3)]^3 - 8 x (-5)^2 =', '-325'],
+        ];
 	</script>
 </body>
 </html>
